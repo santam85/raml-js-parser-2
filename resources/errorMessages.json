@@ -75,6 +75,10 @@
     "code" : "INVALID_LIBRARY_PATH",
     "message" : "Can not resolve library from path: '{{path}}'"
   },
+  "INVALID_LIBRARY_INCLUDE" : {
+    "code" : "INVALID_LIBRARY_INCLUDE",
+    "message" : "Library can not be imported via '!include'."
+  },
   "EMPTY_FILE" : {
     "code" : "EMPTY_FILE",
     "message" : "Empty file: {{path}}"
