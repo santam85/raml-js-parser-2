@@ -42,6 +42,8 @@ export interface SerializeOptions{
 
 
     dumpSchemaContents?: boolean
+
+    jsonLD?: boolean
 }
 export interface BasicNode extends AbstractWrapperNode{
 

@@ -8,7 +8,7 @@ import hl = require("../raml1/highLevelAST");
 import ll = require("../raml1/lowLevelAST");
 import hlImpl = require("../raml1/highLevelImpl");
 import builder = require("../raml1/ast.core/builder");
-
+import jsonLD=require("./jsonLD")
 import typeSystem = def.rt;
 import nominals = typeSystem.nominalTypes;
 import universeHelpers = require("../raml1/tools/universeHelpers")
@@ -104,10 +104,15 @@ export class TCKDumper {
     }
 
     dump(node:any):any {
+
         var highLevelNode = node.highLevel();
+        if (this.options.jsonLD){
+            return jsonLD.dump(highLevelNode);
+        }
         var highLevelParent = highLevelNode && highLevelNode.parent();
         var rootNodeDetails = !highLevelParent && this.options.rootNodeDetails;
         var result = this.dumpInternal(node, rootNodeDetails);
+
         return result;
     }
 
@@ -1238,4 +1243,6 @@ export interface SerializeOptions{
     dumpXMLRepresentationOfExamples?:boolean
 
     dumpSchemaContents?:boolean
+
+    jsonLD?: boolean
 }

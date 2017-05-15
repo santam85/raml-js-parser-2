@@ -11,6 +11,7 @@ import defaultCalculator = require("./defaultCalculator");
 import search=require("../../search/search-interface");
 import universeHelpers = require("../tools/universeHelpers")
 import tckDumper = require("../../util/TCKDumper")
+
 import yaml=require("yaml-ast-parser")
 
 import parserCoreApi = require("./parserCoreApi")
@@ -461,6 +462,7 @@ export class AttributeNodeImpl implements parserCoreApi.AttributeNode{
     }
 
     toJSON(serializeOptions?:tckDumper.SerializeOptions):any{
+
         return new tckDumper.TCKDumper(serializeOptions).dump(this);
     }
 }
