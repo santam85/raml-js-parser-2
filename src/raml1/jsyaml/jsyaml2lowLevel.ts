@@ -416,6 +416,7 @@ export class SimpleExecutor {
         if(doAppendParams) {
             url = this.appendParams(req, req.url);
         }
+        console.log(url);
         xhr.open(req.method, url, false);
         this.doRequest(req,xhr);
         //rheaders=xhr.getAllResponseHeaders();
@@ -600,7 +601,13 @@ export class HTTPResolverImpl implements resolversApi.HTTPResolver {
 
     private toResponse(response, url):Response {
         var msg:string = null;
-        if (response.status >= 400) {
+        if (response.status == 0) {
+            msg = "Unable to execute GET:" + url;
+            if (response.statusText) {
+                msg += " " + JSON.stringify(response.statusText);
+            }
+        }
+        else if (response.status >= 400) {
             msg = "GET " + url + "\nreturned error: " + response.status;
             if (response.statusText) {
                 msg += " " + response.statusText;
@@ -1018,6 +1025,7 @@ export class Project implements lowlevel.IProject{
             if (this._httpResolver){
                 response = this._httpResolver.getResource(p);
                 if(response && response.errorMessage){
+                    this.failedUnits[p] = "hh";
                     throw new Error(response.errorMessage);
                 }
                 if (response) {
@@ -1072,6 +1080,7 @@ export class Project implements lowlevel.IProject{
             }
         }
         if (cnt==null){
+           // this.failedUnits[p]  = "hh";
             return null;
         }
         var tl=util.stringStartsWith(cnt,"#%RAML");
