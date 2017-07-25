@@ -228,6 +228,7 @@ export import universeHelpers=require("./raml1/tools/universeHelpers")
  */
 export import ds=require("raml-definition-system")
 
+ds.universesInfo
 /**
  * Schema utilities.
  */
